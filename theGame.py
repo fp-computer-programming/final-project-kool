@@ -184,6 +184,32 @@ def isOnCorner(x, y):
     # Returns True if the position is in one of the four corners.
     return (x == 0 and y == 0) or (x == 7 and y == 0) or (x == 0 and y == 7) or (x == 7 and y == 7)
 
+def random_question():
+    question1= ("when was Fairfield Prep founded")
+    picked_question = random.randrange(0,7)
+    question0 = input("Who is saint ignatius.")
+    question2 = input("who is arrupe hall named after")
+    question3 = input("who is berchman hall named after")
+    question4 = input("what was the cave that ignatius stayed in")
+    question5 = input("what crippled ignatius for a while")
+    question6 = input("what two books did ignatius read on his bed")
+    question7 = input("what journey did xavier do")
+    if picked_question == 0:
+        question0
+    elif picked_question == 1:
+        question1
+    elif picked_question == 2:
+        question2
+    elif picked_question == 3:
+        question3
+    elif picked_question == 4:
+        question4
+    elif picked_question == 5:
+        question5
+    elif picked_question == 6:
+        question6
+    elif picked_question == 7:
+        question7
 
 def getPlayerMove(board, playerTile):
     # Let the player type in their move.
@@ -196,7 +222,7 @@ def getPlayerMove(board, playerTile):
             return 'quit'
         if move == 'hints':
             return 'hints'
-
+        random_question()
         if len(move) == 2 and move[0] in DIGITS1TO8 and move[1] in DIGITS1TO8:
             x = int(move[0]) - 1
             y = int(move[1]) - 1
@@ -209,6 +235,7 @@ def getPlayerMove(board, playerTile):
             print('For example, 81 will be the top-right corner.')
 
     return [x, y]
+
 
 
 def getComputerMove(board, computerTile):
@@ -304,3 +331,4 @@ while True:
 
     if not playAgain():
         break
+
