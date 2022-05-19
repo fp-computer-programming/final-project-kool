@@ -1,6 +1,7 @@
 # Reversi
 
 import random
+import string
 import sys
 
 def drawBoard(board):
@@ -185,31 +186,22 @@ def isOnCorner(x, y):
     return (x == 0 and y == 0) or (x == 7 and y == 0) or (x == 0 and y == 7) or (x == 7 and y == 7)
 
 def random_question():
-    question1= ("when was Fairfield Prep founded")
-    picked_question = random.randrange(0,7)
-    question0 = input("Who is saint ignatius.")
-    question2 = input("who is arrupe hall named after")
-    question3 = input("who is berchman hall named after")
-    question4 = input("what was the cave that ignatius stayed in")
-    question5 = input("what crippled ignatius for a while")
-    question6 = input("what two books did ignatius read on his bed")
-    question7 = input("what journey did xavier do")
-    if picked_question == 0:
-        question0
-    elif picked_question == 1:
-        question1
-    elif picked_question == 2:
-        question2
-    elif picked_question == 3:
-        question3
-    elif picked_question == 4:
-        question4
-    elif picked_question == 5:
-        question5
-    elif picked_question == 6:
-        question6
-    elif picked_question == 7:
-        question7
+    questions_done = []
+    ques_answ = {"When was Fairfield Prep Founded?: ":"1942","Who is saint Ignatius?: ":"Founder of Prep","Who is arrupe hall named after?: ":"Pedro Arrupe","Who is berchman hall named after?: ":"john berchman","What was the cave that ignatius stayed in?: ":"Cave Medina","What crippled ignatius for a while?: ":"Cannon ball","What two books did ignatius read on his bed?: ":"the life of christ and lives of the saints","What journey was xavier on?: ":"India" }
+    question, answer = random.choice(list(ques_answ.items()))
+
+    try:
+        if questions_done.index(question):
+            print("HI")
+            random_question()
+    except:
+        asked = input(question)
+        if str.lower(asked) == str.lower(answer):
+            questions_done.append(question)
+            return True
+        else:
+            print("You got it wrong!")
+            return True
 
 def getPlayerMove(board, playerTile):
     # Let the player type in their move.
@@ -298,7 +290,11 @@ while True:
                 showHints = not showHints
                 continue
             else:
-                makeMove(mainBoard, playerTile, move[0], move[1])
+                randomQuestion = random_question()
+                if not randomQuestion:
+                    makeMove(mainBoard, playerTile, move[0], move[1])
+                else:
+                    turn = "computer"
 
             if getValidMoves(mainBoard, computerTile) == []:
                 break
